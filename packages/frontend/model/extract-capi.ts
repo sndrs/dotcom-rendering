@@ -221,7 +221,8 @@ export const extract = (data: {}): CAPIType => {
         contentType: getString(data, 'config.page.contentType'),
         hasRelated: getBoolean(data, 'config.page.hasRelated', false),
         hasStoryPackage: getBoolean(data, 'config.page.hasStoryPackage', false),
-        beaconURL: getNonEmptyString(data, 'config.page.beaconUrl'),
+        // beaconURL: getNonEmptyString(data, 'config.page.beaconUrl'),
+        beaconURL: getString(data, 'config.page.beaconUrl', ''),
         isCommentable: getBoolean(data, 'config.page.isCommentable', false),
         commercialProperties: getCommercialProperties(data),
     };

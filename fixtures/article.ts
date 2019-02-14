@@ -1860,7 +1860,7 @@ export const data = {
                 ],
             },
         },
-        commercialURL: 'xxx',
+        commercialUrl: '//fake.url',
     },
     contentFields: {
         fields: {
