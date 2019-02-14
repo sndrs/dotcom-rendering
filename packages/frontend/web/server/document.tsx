@@ -6,7 +6,7 @@ import { CacheProvider } from '@emotion/core';
 
 import { htmlTemplate } from './htmlTemplate';
 import { Article } from '../pages/Article';
-import { getDist } from '@frontend/lib/assets';
+// import { getDist } from '@frontend/lib/assets';
 import { GADataType } from '@frontend/model/extract-ga';
 
 interface Props {
@@ -28,7 +28,15 @@ interface RenderToStringResult {
 }
 
 export const document = ({ data }: Props) => {
-    const { page, site, CAPI, NAV, config, linkedData } = data;
+    const {
+        // page,
+        // site,
+        CAPI,
+        NAV,
+        config,
+        linkedData,
+    } = data;
+    const { commercialUrl } = config;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
     const { html, css, ids: cssIDs }: RenderToStringResult = extractCritical(
         renderToString(
@@ -64,11 +72,16 @@ export const document = ({ data }: Props) => {
      * Please talk to the dotcom platform team before adding more.
      * Scripts will be executed in the order they appear in this array
      */
-    const bundleJS = getDist(`${site}.${page.toLowerCase()}.js`);
-    const vendorJS = getDist('vendor.js');
+    // const bundleJS = getDist(`${site}.${page.toLowerCase()}.js`);
+    // const vendorJS = getDist('vendor.js');
     const polyfillIO =
         'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry&flags=gated&callback=guardianPolyfilled&unknown=polyfill';
-    const priorityScripts = [polyfillIO, vendorJS, bundleJS];
+    const priorityScripts = [
+        polyfillIO,
+        commercialUrl,
+        // vendorJS,
+        // bundleJS
+    ];
 
     /**
      * Low priority scripts.
