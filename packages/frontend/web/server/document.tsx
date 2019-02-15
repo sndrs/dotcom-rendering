@@ -18,6 +18,7 @@ interface Props {
         config: ConfigType;
         GA: GADataType;
         linkedData: object;
+        commercial: any;
     };
 }
 
@@ -35,6 +36,7 @@ export const document = ({ data }: Props) => {
         NAV,
         config,
         linkedData,
+        commercial,
     } = data;
     const { commercialUrl } = config;
     const title = `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
@@ -102,5 +104,6 @@ export const document = ({ data }: Props) => {
         fontFiles,
         data,
         title,
+        commercial,
     });
 };
