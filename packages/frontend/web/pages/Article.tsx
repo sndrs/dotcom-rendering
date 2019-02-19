@@ -11,6 +11,7 @@ import { ArticleBody } from '@frontend/web/components/ArticleBody';
 import { BackToTop } from '@frontend/web/components/BackToTop';
 import { SubNav } from '@frontend/web/components/Header/Nav/SubNav/SubNav';
 import { CookieBanner } from '@frontend/web/components/CookieBanner';
+import { AdSlot } from '@frontend/web/components/AdSlot';
 
 // TODO: find a better of setting opacity
 const articleWrapper = css`
@@ -58,13 +59,28 @@ export const Article: React.FC<{
                 <article>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn}>
-                        <div
+                        {/* <div
                             id="dfp-ad--right"
                             className="js-ad-slot ad-slot ad-slot--right ad-slot--mpu-banner-ad js-sticky-mpu"
                             data-link-name="ad slot right"
                             data-name="right"
                             data-mobile="1,1|2,2|300,250|300,274|300,600|fluid"
                             aria-hidden="true"
+                        /> */}
+                        <AdSlot
+                            name="right"
+                            adTypes={['mpu-banner-ad']}
+                            optClassNames={['js-sticky-mpu']}
+                            sizeMapping={{
+                                mobile: [
+                                    '1,1',
+                                    '2,2',
+                                    '300,250',
+                                    '300,274',
+                                    '300,600',
+                                    'fluid',
+                                ],
+                            }}
                         />
                     </div>
                 </article>
