@@ -49,6 +49,24 @@ export const Article: React.FC<{
     data: ArticleProps;
 }> = ({ data }) => (
     <div>
+        <AdSlot
+            name="top-above-nav"
+            adTypes={['top-banner-ad', 'top-banner-ad-desktop']}
+            optClassNames={['js-sticky-mpu']}
+            sizeMapping={{
+                tablet: ['1,1', '2,2', '728,90', '88,71', 'fluid'],
+                desktop: [
+                    '1,1',
+                    '2,2',
+                    '728,90',
+                    '940,230',
+                    '900,250',
+                    '970,250',
+                    '88,71',
+                    'fluid',
+                ],
+            }}
+        />
         <Header
             nav={data.NAV}
             pillar={data.CAPI.pillar}
@@ -59,14 +77,6 @@ export const Article: React.FC<{
                 <article>
                     <ArticleBody CAPI={data.CAPI} config={data.config} />
                     <div className={secondaryColumn}>
-                        {/* <div
-                            id="dfp-ad--right"
-                            className="js-ad-slot ad-slot ad-slot--right ad-slot--mpu-banner-ad js-sticky-mpu"
-                            data-link-name="ad slot right"
-                            data-name="right"
-                            data-mobile="1,1|2,2|300,250|300,274|300,600|fluid"
-                            aria-hidden="true"
-                        /> */}
                         <AdSlot
                             name="right"
                             adTypes={['mpu-banner-ad']}

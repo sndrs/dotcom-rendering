@@ -44,15 +44,19 @@ export const AdSlot: React.FC<{
             .join(' ');
     };
 
+    // const getOptionalProps = (): object => ({
+    //     ...(showLabel && { 'data-label': true }),
+    //     ...(refresh && { 'data-refresh': true }),
+    //     ...(outOfPage && { 'data-out-of-page': true }),
+    // });
+
     return (
         <div
             id={`dfp-ad--${optId || name}`}
             className={getClassNames()}
             data-link-name={`ad slot ${name}`}
             data-name={name}
-            // data-label={showLabel}
-            // data-refresh={refresh}
-            // data-out-of-page={outOfPage}
+            // {...getOptionalProps()}
             {...dataSizeMappings}
             aria-hidden="true"
         />
