@@ -4,13 +4,13 @@ import 'jest-dom/extend-expect';
 import 'react-testing-library/cleanup-after-each';
 
 // Stub global Guardian object
-window.guardian = {
-    app: {
-        data: {},
-        cssIDs: [],
-    },
-    polyfilled: false,
-    onPolyfilled: () => {
-        return undefined;
-    },
-};
+// window.guardian = {
+//     app: {
+//         data: {},
+//         cssIDs: [],
+//     },
+//     polyfilled: false,
+//     onPolyfilled: () => {
+//         return undefined;
+//     },
+// };
