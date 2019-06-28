@@ -57,8 +57,6 @@ const validateOld = (data: any) => {
     };
 };
 
-
-
 const runBenchmarks = (samples: string[]) => {
     let count = 0;
     const rootIndex = __dirname.split('/').indexOf('dotcom-rendering');
@@ -67,62 +65,50 @@ const runBenchmarks = (samples: string[]) => {
         .slice(0, rootIndex + 1)
         .join('/');
 
-
-
-
     const results = samples.map((sample: string) => {
         count = count + 1;
         const path = `${root}/${sample}`;
         const sampleJson = JSON.parse(fs.readFileSync(path, 'utf-8'));
+        const name = sample.split('/').slice(3);
         const suite = new Benchmark.Suite();
-
+        console.log(name);
         try {
             suite
-                .add(
-                    `JSON Schema`, function () {
-                        validateNew(sampleJson)
-                    }
-                )
-                .add(
-                    `Validators`, function () {
-                        validateOld(sampleJson)
-                    }
-                )
-                .on('cycle', function (event) {
+                .add(`JSON Schema`, function () {
+                    validateNew(sampleJson);
+                })
+                .add(`Validators`, function () {
+                    validateOld(sampleJson);
+                })
+                .on('cycle', function (event: any) {
                     console.log(String(event.target));
                 })
-                .on('complete', function () {
+                .on('complete', function (event: any) {
+                    const j = event.currentTarget['0'].hz;
+                    const v = event.currentTarget['1'].hz;
+                    const change = ((j - v) / v) * 100;
+                    console.log('percent change', Math.floor(change) + '%');
                 })
                 .run({ async: false });
 
             return suite.filter('fastest').map('name');
-
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
     });
 
-    return results
-
+    return results;
 };
 
-
-
 describe('Data Validation Performance Comparison', () => {
-
     //  NOTE: Run scripts / validation / sampleCollection.js to collect json samples for testing
     const samples = glob.sync('scripts/validation/samples/*.json', {});
     if (samples.length > 0) {
         const results = runBenchmarks(samples);
         console.log(results);
 
-        it("should be faster", () => {
-            expect(results.length).toEqual(2)
-        })
-
-
+        it('should console.log benchmark results', () => {
+            expect(results.length).toEqual(samples.length);
+        });
     }
 });
-
-
-
